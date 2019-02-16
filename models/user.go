@@ -5,6 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"fmt"
 	"github.com/astaxie/beego"
+	"log"
 )
 
 type User struct {
@@ -41,7 +42,9 @@ func AddUser(u *User) int {
 	o.Using("default")
 	id, err := o.Insert(u)
 	if err != nil {
-		fmt.Println("inert error = ", err)
+		//fmt.Println("inert error = ", err)
+		log.Println("添加用户失败：error:", err)
+		return 0
 	}
 	beego.Info("reg insert succ id = ", id)
 	return u.Id
